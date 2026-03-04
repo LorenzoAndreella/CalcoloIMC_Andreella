@@ -1,0 +1,16 @@
+C:\Users\lorenzo\Desktop\c sharp\CalcoloIMC\CalcoloIMC\bin\Debug\net10.0-windows\CalcoloIMC.exe
+C:\Users\lorenzo\Desktop\c sharp\CalcoloIMC\CalcoloIMC\bin\Debug\net10.0-windows\CalcoloIMC.deps.json
+C:\Users\lorenzo\Desktop\c sharp\CalcoloIMC\CalcoloIMC\bin\Debug\net10.0-windows\CalcoloIMC.runtimeconfig.json
+C:\Users\lorenzo\Desktop\c sharp\CalcoloIMC\CalcoloIMC\bin\Debug\net10.0-windows\CalcoloIMC.dll
+C:\Users\lorenzo\Desktop\c sharp\CalcoloIMC\CalcoloIMC\bin\Debug\net10.0-windows\CalcoloIMC.pdb
+C:\Users\lorenzo\Desktop\c sharp\CalcoloIMC\CalcoloIMC\obj\Debug\net10.0-windows\CalcoloIMC.Form1.resources
+C:\Users\lorenzo\Desktop\c sharp\CalcoloIMC\CalcoloIMC\obj\Debug\net10.0-windows\CalcoloIMC.csproj.GenerateResource.cache
+C:\Users\lorenzo\Desktop\c sharp\CalcoloIMC\CalcoloIMC\obj\Debug\net10.0-windows\CalcoloIMC.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\lorenzo\Desktop\c sharp\CalcoloIMC\CalcoloIMC\obj\Debug\net10.0-windows\CalcoloIMC.AssemblyInfoInputs.cache
+C:\Users\lorenzo\Desktop\c sharp\CalcoloIMC\CalcoloIMC\obj\Debug\net10.0-windows\CalcoloIMC.AssemblyInfo.cs
+C:\Users\lorenzo\Desktop\c sharp\CalcoloIMC\CalcoloIMC\obj\Debug\net10.0-windows\CalcoloIMC.csproj.CoreCompileInputs.cache
+C:\Users\lorenzo\Desktop\c sharp\CalcoloIMC\CalcoloIMC\obj\Debug\net10.0-windows\CalcoloIMC.dll
+C:\Users\lorenzo\Desktop\c sharp\CalcoloIMC\CalcoloIMC\obj\Debug\net10.0-windows\refint\CalcoloIMC.dll
+C:\Users\lorenzo\Desktop\c sharp\CalcoloIMC\CalcoloIMC\obj\Debug\net10.0-windows\CalcoloIMC.pdb
+C:\Users\lorenzo\Desktop\c sharp\CalcoloIMC\CalcoloIMC\obj\Debug\net10.0-windows\CalcoloIMC.genruntimeconfig.cache
+C:\Users\lorenzo\Desktop\c sharp\CalcoloIMC\CalcoloIMC\obj\Debug\net10.0-windows\ref\CalcoloIMC.dll
