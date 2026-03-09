@@ -14,3 +14,4 @@ C:\Users\lorenzo\Desktop\c sharp\CalcoloIMC\CalcoloIMC\obj\Debug\net10.0-windows
 C:\Users\lorenzo\Desktop\c sharp\CalcoloIMC\CalcoloIMC\obj\Debug\net10.0-windows\CalcoloIMC.pdb
 C:\Users\lorenzo\Desktop\c sharp\CalcoloIMC\CalcoloIMC\obj\Debug\net10.0-windows\CalcoloIMC.genruntimeconfig.cache
 C:\Users\lorenzo\Desktop\c sharp\CalcoloIMC\CalcoloIMC\obj\Debug\net10.0-windows\ref\CalcoloIMC.dll
+C:\Users\lorenzo\Desktop\c sharp\CalcoloIMC\CalcoloIMC\obj\Debug\net10.0-windows\CalcoloIMC.sourcelink.json

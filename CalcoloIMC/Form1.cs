@@ -8,16 +8,19 @@ namespace CalcoloIMC
             public int peso;
             public int altezza;
             public double imc;
-            public Persona(string nome, int peso, int altezza, double imc) {
+            public string fascia;
+            public Persona(string nome, int peso, int altezza, double imc, string fascia)
+            {
                 this.nome = nome;
                 this.peso = peso;
                 this.altezza = altezza;
                 this.imc = imc;
+                this.fascia = fascia;
             }
 
             public string Stampa()
             {
-                return $"Nome: {nome}   Peso: {peso}kg    Altezza: {altezza}cm";
+                return $"Nome: {nome}   Peso: {peso}kg    Altezza: {altezza}cm      IMC: {imc}      Fascia: {fascia} ";
             }
         }
 
@@ -34,26 +37,28 @@ namespace CalcoloIMC
             bool x;
             bool y;
             int peso;
-            x = int.TryParse(txtPeso.Text, out peso);        
+            string fascia;
             int altezza;
-            double altezzaMetri;
+            int imc = 0;
+            x = int.TryParse(txtPeso.Text, out peso);
             y = int.TryParse(txtAltezza.Text, out altezza);
-            if (peso < 1 || peso > 500 || altezza < 50 || altezza > 300 || nome == "" || !x || !y) 
+            if (peso < 1 || peso > 500 || altezza < 50 || altezza > 300 || nome == "" || !x || !y)
             {
                 txtRisposta.Text = "Errore, inserisci dati corretti";
                 return;
             }
-            altezzaMetri = (double)altezza / 100;           //imc calcolato con l'altezza in metri
-            double imc = 1;
-            imc = peso / Math.Pow(altezzaMetri, 2);
-            imc = Math.Round(imc, 2);
-            Persona pers = new Persona(nome, peso, altezza, imc);
+            fascia = "Non calcolata";
+            Persona pers = new Persona(nome, peso, altezza, imc, fascia);
             persone.Add(pers);
             lstPersone.Items.Add(pers.Stampa());            //listbox
+
+            txtCognNome.Text = "";
+            txtPeso.Text = "";
+            txtAltezza.Text = "";
         }
 
         private void btnEsegui_Click(object sender, EventArgs e)
-        {
+        { 
             if (persone.Count == 0)
             {
                 txtRisposta.Text = "Nessuna persona";
@@ -62,29 +67,34 @@ namespace CalcoloIMC
             if (rdbIMC.Checked)
             {
                 CalcoloIMC();
-            } else if (rdbMedia.Checked)
+            }
+            else if (rdbMedia.Checked)
             {
                 CalcoloMedia();
-            } else if (rdbModa.Checked) 
-            {   
+            }
+            else if (rdbModa.Checked)
+            {
                 CalcoloModa();
-            } else if (rdbMediana.Checked)
+            }
+            else if (rdbMediana.Checked)
             {
                 CalcoloMediana();
-            } else if (rdbVarianza.Checked)
+            }
+            else if (rdbVarianza.Checked)
             {
                 CalcoloVarianza();
-            } else if (rdbMediaSottoGruppo.Checked)
+            }
+            else if (rdbMediaSottoGruppo.Checked)
             {
                 CalcoloGruppo();
             }
         }
 
         private void txtPeso_KeyPress(object sender, KeyPressEventArgs e)
-        { 
-            if (!Char.IsNumber(e.KeyChar) && e.KeyChar !=(char)Keys.Back && e.KeyChar != (char)Keys.Clear)
+        {
+            if (!Char.IsNumber(e.KeyChar) && e.KeyChar != (char)Keys.Back && e.KeyChar != (char)Keys.Clear)
             {
-                e.KeyChar = (char)0;            
+                e.KeyChar = (char)0;
             }
         }
 
@@ -98,44 +108,65 @@ namespace CalcoloIMC
 
         private void CalcoloIMC()
         {
-            if (lstPersone.SelectedIndex == -1) 
+            if (lstPersone.SelectedIndex == -1)
             {
                 txtRisposta.Text = "Seleziona una persona!";
                 return;
             }
 
-            
             Persona pers = persone[lstPersone.SelectedIndex];           //persona selezionata
+            double altezzaMetri = (double)pers.altezza / 100;           //imc calcolato con l'altezza in metri
+            double imc;
+            imc = pers.peso / Math.Pow(altezzaMetri, 2);
+            imc = Math.Round(imc, 2);
+
             string cat;
-            if (pers.imc < 18.5) cat = "sottopeso";
-            else if (pers.imc < 24.9) cat = "normopeso";
-            else if (pers.imc < 29.9) cat = "sovrappeso";
+
+            if (imc < 18.5) cat = "sottopeso";
+            else if (imc < 24.9) cat = "normopeso";
+            else if (imc < 29.9) cat = "sovrappeso";
             else cat = "obeso";
+
+            pers.fascia = cat;
+            pers.imc = imc;
+
+            persone[lstPersone.SelectedIndex] = pers;
 
 
             txtRisposta.Text = $"IMC : {pers.imc}. Sei nella fascia: {cat}";
-            
+            lstPersone.Items[lstPersone.SelectedIndex] = pers.Stampa();
         }
-
         private void CalcoloMedia()
         {
             double media = 0;
             foreach (var pers in persone)
             {
+                if (pers.imc == 0)
+                {
+                    txtRisposta.Text = "Non è possibile calcolare la media, prima devi calcolare gli IMC";
+                    return;
+                }
                 media += pers.imc;
             }
             media /= persone.Count;
-            media = Math.Round(media,2);
+            media = Math.Round(media, 2);
 
             txtRisposta.Text = $"La media degli IMC: {media}";
         }
 
         private void CalcoloModa()
         {
+
             int sottopeso = 0, normopeso = 0, sovrappeso = 0, obeso = 0;
 
             foreach (var pers in persone)
             {
+                if (pers.imc == 0)
+                {
+                    txtRisposta.Text = "Non è possibile calcolare la moda, prima devi calcolare gli IMC";
+                    return;
+                }
+
                 if (pers.imc < 18.5) sottopeso++;
                 else if (pers.imc < 24.9) normopeso++;
                 else if (pers.imc < 29.9) sovrappeso++;
@@ -149,7 +180,7 @@ namespace CalcoloIMC
             string moda = "";                       //mi serve per mettere insieme eventuali mode uguali
             if (sottopeso == max)
             {
-                if (moda != "") moda += ", ";           //!=" " --> allora significa che c'è già qualcosa quindi ","
+                if (moda != "") moda += ", ";           //!="" allora significa che c'è già qualcosa quindi ","
                 moda += "sottopeso";
             }
             if (normopeso == max)
@@ -184,6 +215,12 @@ namespace CalcoloIMC
 
             foreach (var pers in persone)
             {
+                if (pers.imc == 0)
+                {
+                    txtRisposta.Text = "Non è possibile calcolare la mediana, prima devi calcolare gli IMC";
+                    return;
+                }
+
                 double altezzaM = pers.altezza / 100.0;
                 double imc = pers.peso / (altezzaM * altezzaM);
                 listaIMC.Add(imc);
@@ -198,14 +235,14 @@ namespace CalcoloIMC
             {
                 int i1 = n / 2 - 1;             //valori 
                 int i2 = n / 2;                 //centrali
-                mediana = (listaIMC[i1] + listaIMC[i2]) / 2.0; 
+                mediana = (listaIMC[i1] + listaIMC[i2]) / 2.0;
             }
             else
             {
                 mediana = listaIMC[n / 2];
             }
 
-            mediana = Math.Round(mediana, 2);          
+            mediana = Math.Round(mediana, 2);
             txtRisposta.Text = $"La mediana è {mediana}";
         }
 
@@ -214,20 +251,26 @@ namespace CalcoloIMC
             double media = 0;
             foreach (var pers in persone)
             {
+                if (pers.imc == 0)
+                {
+                    txtRisposta.Text = "Non è possibile calcolare la varianza, prima devi calcolare gli IMC";
+                    return;
+                }
+
                 media += pers.imc;
             }
-            media = media/persone.Count;
+            media = media / persone.Count;
 
             double ScartiQuadratici = 0;
 
             foreach (var pers in persone)
             {
-                double scarto = pers.imc - media;
-                ScartiQuadratici += Math.Pow(scarto, 2);
+                double scarto = pers.imc - media;                   //x-M
+                ScartiQuadratici += Math.Pow(scarto, 2);            //(x-M)^2
             }
 
-            double varianza = ScartiQuadratici / persone.Count;
-            varianza = Math.Round(varianza,2);
+            double varianza = ScartiQuadratici / persone.Count;     //sommatoria (x-M)^2 diviso numero persone
+            varianza = Math.Round(varianza, 2);
 
             txtRisposta.Text = $"La varianza vale: {varianza}";
         }
@@ -241,26 +284,32 @@ namespace CalcoloIMC
 
             foreach (var pers in persone)
             {
+                if (pers.imc == 0)
+                {
+                    txtRisposta.Text = "Non è possibile calcolare le medie, prima devi calcolare gli IMC";
+                    return;
+                }
+
                 if (pers.imc < 18.5)
                 {
                     sottopeso++;
                     sotpe += pers.imc;
                 }
-                else if (pers.imc < 24.9) 
+                else if (pers.imc < 24.9)
                 {
                     normopeso++;
                     normope += pers.imc;
-                } 
-                else if (pers.imc < 29.9) 
+                }
+                else if (pers.imc < 29.9)
                 {
                     sovrappeso++;
                     sovrappe += pers.imc;
-                } 
-                else 
+                }
+                else
                 {
                     obeso++;
                     ob += pers.imc;
-                } 
+                }
             }
             if (sottopeso != 0) media1 = Math.Round(sotpe / sottopeso, 2);              //evitare di fare diviso 0
             if (normopeso != 0) media2 = Math.Round(normope / normopeso, 2);
@@ -269,5 +318,33 @@ namespace CalcoloIMC
             txtRisposta.Text = $"Sottopeso: {media1}   Normopeso: {media2}  Sovrappeso: {media3}    Obeso: {media4}";
         }
 
+        private void btnSalva_Click(object sender, EventArgs e)
+        {
+            if (persone.Count == 0)
+            {
+                txtRisposta.Text = "Non ci sono persone";
+                return;
+            }
+
+            foreach (var pers in persone)
+            {
+                if (pers.imc == 0)
+                {
+                    txtRisposta.Text = "Non è possibile creare il file, prima devi calcolare gli IMC";
+                    return;
+                }
+            }
+            
+
+            using (StreamWriter writer = new StreamWriter("File IMC.txt", false))
+            {
+                foreach (var pers in persone)
+                {
+                    writer.WriteLine(pers.Stampa());
+                }
+            }
+            txtRisposta.Text = "File salvato correttamente!";
+
+        }
     }
 }

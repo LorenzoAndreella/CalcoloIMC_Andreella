@@ -45,6 +45,7 @@
             lblAltezza = new Label();
             lblRisposta = new Label();
             txtRisposta = new TextBox();
+            btnSalva = new Button();
             SuspendLayout();
             // 
             // txtCognNome
@@ -208,11 +209,22 @@
             txtRisposta.Size = new Size(609, 23);
             txtRisposta.TabIndex = 16;
             // 
+            // btnSalva
+            // 
+            btnSalva.Location = new Point(726, 363);
+            btnSalva.Name = "btnSalva";
+            btnSalva.Size = new Size(75, 23);
+            btnSalva.TabIndex = 17;
+            btnSalva.Text = "SALVA";
+            btnSalva.UseVisualStyleBackColor = true;
+            btnSalva.Click += btnSalva_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnSalva);
             Controls.Add(txtRisposta);
             Controls.Add(lblRisposta);
             Controls.Add(lblAltezza);
@@ -255,5 +267,6 @@
         private Label lblAltezza;
         private Label lblRisposta;
         private TextBox txtRisposta;
+        private Button btnSalva;
     }
 }
